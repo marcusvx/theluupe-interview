@@ -8,11 +8,15 @@ const permissions = {
   Query: {
     user: r.isAnybody,
     users: r.isAnybody,
+    posts: r.isAnybody,
+    post: r.isAnybody,
   },
   Mutation: {
     createOneUser: r.isAnybody,
+    createOnePost: r.isAnybody,
   },
   User: r.isAnybody,
+  Post: r.isAnybody,
 };
 
 const permissionsMiddleware = shield(permissions, {
