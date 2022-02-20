@@ -25,3 +25,4 @@ yarn-error.log*
 
 # prisma
 server/graphql/generated
+.env
