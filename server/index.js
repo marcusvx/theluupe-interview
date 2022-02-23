@@ -12,6 +12,7 @@ const { permissionsMiddleware } = require('./graphql/middleware/permissions');
 const { nextApp, nextMiddleware } = require('./routers/next');
 const { authRouter } = require('./routers/auth');
 const prisma = require('./lib/prisma');
+
 Graceful.captureExceptions = true;
 
 const GENERIC_ERROR_MSG =

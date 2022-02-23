@@ -16,9 +16,7 @@
     [
       "module-resolver",
       {
-        "root": [
-          "."
-        ],
+        "root": ["."],
         "alias": {
           "@dal": "./src/dal",
           "@dom": "./src/dom",
@@ -35,5 +33,6 @@
         }
       }
     ]
-  ]
+  ],
+  "ignore": ["node_modules"]
 }

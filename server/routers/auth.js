@@ -2,8 +2,8 @@ const { ironSession } = require('iron-session/express');
 const { compare } = require('bcrypt');
 const { Router } = require('express');
 const { addAsync } = require('@awaitjs/express');
-const { sessionOptions } = require('../../shared/lib/auth');
-const { prisma } = require('../lib/prisma');
+const { sessionOptions } = require('../lib/auth');
+const prisma = require('../lib/prisma');
 
 const router = addAsync(Router());
 
@@ -29,23 +29,44 @@ router.postAsync('/login', session, async (req, res) => {
       });
     }
 
-    req.session.user = {
+    const userData = {
       id: user.userId,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
     };
+    req.session.user = userData;
     await req.session.save();
 
-    return res.send({ ok: true });
+    return res.send(userData);
   } catch (error) {
     return res.status(500).send({ message: error.message });
   }
 });
 
-router.getAsync('/logout', async (req, res) => {
+router.getAsync('/profile', session, async function(req, res) {
+  const { user } = req.session;
+  if (!user) {
+    return res.status(403).send({
+      message: 'User not authenticated',
+    });
+  }
+
+  res.send(user);
+});
+
+router.getAsync('/logout', session, async (req, res) => {
+  const { session } = req;
+  if (session) {
+    session.destroy();
+  }
+  
   res.json({ status: 'ok' });
 });
+
+function toSessionUser(dbUser) {
+  return;
+}
 
 module.exports = {
   authRouter: router,

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
@@ -8,9 +8,19 @@ import { Login as LoginSchema } from '@shared/validation/schemas';
 import { ColGroup, Form, Formik, Row } from '@atoms/Form';
 import { SubmitButton } from '@molecules/forms/SubmitButton';
 import { TextField } from '@molecules/forms/TextField';
+import useUser from '@lib/use-user';
+import { useRouter } from 'next/router';
 
 export function LoginForm(): JSX.Element {
-  const initialValues = {};
+  const initialValues = { email: '', password: '' };
+  const { user, mutate, loggedOut } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user && !loggedOut) {
+      router.push('/');
+    }
+  }, [user, loggedOut]);
 
   const handleSubmit = useCallback(async (input: Partial<LoginInput>) => {
     const { email, password } = input;
@@ -20,10 +30,12 @@ export function LoginForm(): JSX.Element {
         email,
         password,
       }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
 
-    const { token } = await result.json();
-    localStorage.setItem('jwt_token', token);
+    mutate();
   }, []);
 
   return (

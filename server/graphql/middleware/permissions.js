@@ -1,6 +1,6 @@
 const { rule, shield } = require('graphql-shield');
 const { ironSession } = require('iron-session/express');
-const { sessionOptions } = require('../../../shared/lib/auth');
+const { sessionOptions } = require('../../lib/auth');
 
 const r = {
   isAnybody: rule({ cache: 'contextual' })(() => true),

@@ -5,7 +5,6 @@ import { ApolloLink } from 'apollo-link';
 import { onError } from 'apollo-link-error';
 import { HttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-unfetch';
-import Head from 'next/head';
 import React from 'react';
 
 import { log } from '../../shared/lib/logger';
