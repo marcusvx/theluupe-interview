@@ -1,4 +1,5 @@
 const { arg, mutationType } = require('nexus');
+const { hash } = require('bcrypt');
 
 const Mutation = mutationType({
   definition(t) {
@@ -20,11 +21,13 @@ const Mutation = mutationType({
           if (user) {
             throw new Error('Email is already associated with another user');
           }
+
+          const hashedPassword = await hash(password, 10);
           return await ctx.prisma.user.create({
             data: {
               firstName,
               lastName,
-              password,
+              password: hashedPassword,
               email,
             },
           });

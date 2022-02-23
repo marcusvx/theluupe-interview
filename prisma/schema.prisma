@@ -14,7 +14,8 @@ model User {
   firstName String?
   lastName  String?
   posts     Post[]
-  password  String  @default("$2a$10$MgTniVfxP/V.9mRlN2TuTuCwufGjKKHxvaRYqqyd1dvS4pZBLngQC")
+  // default password: 12345
+  password  String  @default("$2b$10$t9z2hwiQR/GmGQ/crs2VJ.IBo9AHDsEifT3tg5orsThSV6oYU9PZa")
 }
 
 model Post {
