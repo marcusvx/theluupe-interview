@@ -4,11 +4,10 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
-import { withApollo } from '@lib/apollo';
-
-import { Icon } from '@atoms/Icon';
 import InstagramLogo from '@assets/logos/instagram.svg';
 import { PublicLayout } from '@templates/Layout';
+import { withApollo } from '../lib/apollo';
+import { Icon } from '../atoms/Icon';
 
 function Error() {
   const title = 'Whoops!';

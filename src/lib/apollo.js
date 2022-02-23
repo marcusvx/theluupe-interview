@@ -8,7 +8,7 @@ import fetch from 'isomorphic-unfetch';
 import Head from 'next/head';
 import React from 'react';
 
-import { log } from '@shared/lib/logger';
+import { log } from '../../shared/lib/logger';
 import { addNotification } from './notifications';
 
 let globalApolloClient = null;
@@ -153,8 +153,6 @@ export function withApollo(PageComponent, { ssr = true } = {}) {
           }
 
           // getDataFromTree does not call componentWillUnmount
-          // head side effect therefore need to be cleared manually
-          Head.rewind();
         }
       }
 

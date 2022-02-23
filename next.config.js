@@ -2,15 +2,20 @@ require('dotenv').config();
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const withPlugins = require('next-compose-plugins');
-const withTM = require('next-transpile-modules')(['imask', 'react-imask', 'client-zip', 'react-sortablejs']);
-const withCSS = require('@zeit/next-css');
+const withTM = require('next-transpile-modules')(['imask', 'react-imask', 'client-zip']);
 
 const nextConfig = {
+  webpack5: false,
   poweredByHeader: false,
   webpack: (config, options) => {
     const { isServer } = options;
 
     if (!isServer) {
+      // // eslint-disable-next-line no-param-reassign
+      // config.resolve.fallback.net = false;
+      // // eslint-disable-next-line no-param-reassign
+      // config.resolve.fallback.tls = false;
+
       // eslint-disable-next-line no-param-reassign
       config.node = {
         net: 'empty',
@@ -33,22 +38,6 @@ const nextConfig = {
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
       loader: 'graphql-tag/loader',
-    });
-
-    config.module.rules.push({
-      test: /\.(woff(2)?|otf|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-      use: [
-        {
-          loader: 'url-loader',
-          options: {
-            limit: 8192,
-            fallback: 'file-loader',
-            publicPath: `/_next/static/chunks/fonts/`,
-            outputPath: `${isServer ? '../' : ''}static/chunks/fonts/`,
-            name: '[name]-[hash].[ext]',
-          },
-        },
-      ],
     });
 
     config.module.rules.push({
@@ -80,4 +69,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([withCSS, withTM], nextConfig);
+module.exports = withPlugins([withTM], nextConfig);

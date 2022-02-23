@@ -2,16 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import Nav from 'react-bootstrap/Nav';
-
 import Logo from '@assets/logos/theluupe.svg';
+import { sessionOptions } from '@shared/lib/auth';
 
 export const HEADER_HEIGHT = '84px';
 
-export function HorizontalNav() {
-  const currentUser = {
-    isAuthenticated: false,
-  };
-  const { isAuthenticated } = currentUser;
+export function HorizontalNav({ user }) {
+  const isAuthenticated = Boolean(user);
 
   return (
     <header>
@@ -52,18 +49,28 @@ export function HorizontalNav() {
         )} */}
         {!isAuthenticated && (
           <Nav.Item className="mr-1">
-            <a className="btn btn-secondary" href="/auth/login">
-              Log in
-            </a>
-            <a className="btn btn-primary text-white ml-3" href="/auth/signup">
-              Sign up
-            </a>
+            <Link href="/login">
+              <a className="btn btn-secondary">Log in</a>
+            </Link>
+            <Link href="/signup">
+              <a className="btn btn-primary text-white ml-3">Sign up</a>
+            </Link>
           </Nav.Item>
         )}
       </Wrapper>
     </header>
   );
 }
+
+// export const getServerSideProps = withIronSessionSsr(async function getServerSideProps({ req }) {
+//   const { user } = req.session;
+
+//   return {
+//     props: {
+//       user,
+//     },
+//   };
+// }, sessionOptions);
 
 const Wrapper = styled(Nav)`
   display: flex;

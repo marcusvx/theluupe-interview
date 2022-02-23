@@ -1,7 +1,13 @@
 const { rule, shield } = require('graphql-shield');
+const { ironSession } = require('iron-session/express');
+const { sessionOptions } = require('../../../shared/lib/auth');
 
 const r = {
   isAnybody: rule({ cache: 'contextual' })(() => true),
+  isAuthenticatedUser: rule()(() => {
+    const session = ironSession(sessionOptions);
+    return Boolean(session && session.user);
+  }),
 };
 
 const permissions = {
@@ -13,7 +19,7 @@ const permissions = {
   },
   Mutation: {
     createUser: r.isAnybody,
-    createOnePost: r.isAnybody,
+    createOnePost: r.isAuthenticatedUser,
   },
   User: r.isAnybody,
   Post: r.isAnybody,
