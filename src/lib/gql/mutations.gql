@@ -1,7 +1,8 @@
 #import "./fragments.gql"
 
-mutation CreateOneUser($data: UserCreateInput!) {
-  createOneUser(data: $data) {
+# Write your query or mutation here
+mutation CreateUser($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+  createUser(signupInput: { firstName: $firstName, lastName: $lastName, email: $email, password: $password }) {
     ...UserInfo
   }
 }

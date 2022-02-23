@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { IUser } from '@dal/User';
 import { User as UserSchema } from '@shared/validation/schemas';
-import { CreateOneUser } from '@lib/gql/mutations.gql';
+import { CreateUser } from '@lib/gql/mutations.gql';
 
 import { ColGroup, Form, Formik, Row } from '@atoms/Form';
 import { SubmitButton } from '@molecules/forms/SubmitButton';
@@ -17,20 +17,20 @@ export type IUserFormProps = {
 };
 
 export function UserForm({ onSubmit, onCancel }: IUserFormProps): JSX.Element {
-  const [createOneUser] = useMutation(CreateOneUser);
+  const [createUser] = useMutation(CreateUser);
   const initialValues = {};
 
   const handleSubmit = useCallback(
     async (user: Partial<IUser>) => {
-      const createResults = await createOneUser({
+      const createResults = await createUser({
         variables: {
-          data: user,
+          ...user,
         },
       });
       onSubmit();
       return createResults;
     },
-    [onSubmit, createOneUser],
+    [onSubmit, createUser],
   );
 
   return (
@@ -51,6 +51,16 @@ export function UserForm({ onSubmit, onCancel }: IUserFormProps): JSX.Element {
             <Row>
               <ColGroup>
                 <TextField label="Last name" name="lastName" />
+              </ColGroup>
+            </Row>
+            <Row>
+              <ColGroup>
+                <TextField label="Password" name="password" />
+              </ColGroup>
+            </Row>
+            <Row>
+              <ColGroup>
+                <TextField label="Conmfirm Password" name="passwordConfirmation" />
               </ColGroup>
             </Row>
           </Modal.Body>

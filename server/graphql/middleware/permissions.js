@@ -12,7 +12,7 @@ const permissions = {
     post: r.isAnybody,
   },
   Mutation: {
-    createOneUser: r.isAnybody,
+    createUser: r.isAnybody,
     createOnePost: r.isAnybody,
   },
   User: r.isAnybody,

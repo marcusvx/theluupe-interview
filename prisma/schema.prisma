@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native"]
 }
 
@@ -9,16 +9,16 @@ datasource db {
 }
 
 model User {
-  id          String  @id @default(cuid())
-  email       String  @unique
-  firstName   String?
-  lastName    String?
-  posts   Post[]
+  id        String  @id @default(cuid())
+  email     String  @unique
+  firstName String?
+  lastName  String?
+  posts     Post[]
+  password  String  @default("$2a$10$MgTniVfxP/V.9mRlN2TuTuCwufGjKKHxvaRYqqyd1dvS4pZBLngQC")
 }
 
-
 model Post {
-  id        String  @id @default(cuid())
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   title     String

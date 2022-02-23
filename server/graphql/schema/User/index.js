@@ -1,5 +1,4 @@
-const { objectType } = require('nexus');
-
+const { inputObjectType, objectType } = require('nexus');
 const { fullName } = require('./resolvers');
 
 const User = objectType({
@@ -13,6 +12,17 @@ const User = objectType({
   },
 });
 
+const signupInput = inputObjectType({
+  name: 'SignupInput',
+  definition(t) {
+    t.string('firstName', { nullable: false });
+    t.string('lastName', { nullable: false });
+    t.string('email', { nullable: false });
+    t.string('password', { nullable: false });
+  },
+});
+
 module.exports = {
   User,
+  signupInput,
 };

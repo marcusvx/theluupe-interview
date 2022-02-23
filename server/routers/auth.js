@@ -7,7 +7,7 @@ router.getAsync('/login', async (req, res) => {
   res.json({ status: 'ok' });
 });
 
-router.getAsync('/signup', async (req, res) => {
+router.postAsync('/signup', async (req, res) => {
   res.json({ status: 'ok' });
 });
 

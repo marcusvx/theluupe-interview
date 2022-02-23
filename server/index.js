@@ -4,6 +4,7 @@ const { GraphQLServer } = require('graphql-yoga');
 const { MutationValidationErrorType, FieldValidationErrorType, yupMiddleware } = require('graphql-yup-middleware');
 const Graceful = require('node-graceful');
 const requestId = require('express-request-id');
+const bodyParser = require('body-parser');
 
 const { log } = require('../shared/lib/logger');
 const { schema, context } = require('./graphql');
@@ -11,7 +12,6 @@ const { permissionsMiddleware } = require('./graphql/middleware/permissions');
 const { nextApp, nextMiddleware } = require('./routers/next');
 const { authRouter } = require('./routers/auth');
 const prisma = require('./lib/prisma');
-
 Graceful.captureExceptions = true;
 
 const GENERIC_ERROR_MSG =
@@ -40,6 +40,7 @@ async function start() {
     gqlServer.express.disable('x-powered-by');
     gqlServer.express.enable('trust proxy');
     gqlServer.express.use(requestId());
+    gqlServer.express.use(bodyParser.json());
     // Add server-wide express middleware
     gqlServer.express.use(basePaths.auth, authRouter);
     // Add Next.js routes to GraphQL server base
