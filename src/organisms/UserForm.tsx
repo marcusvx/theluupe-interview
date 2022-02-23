@@ -55,12 +55,12 @@ export function UserForm({ onSubmit, onCancel }: IUserFormProps): JSX.Element {
             </Row>
             <Row>
               <ColGroup>
-                <TextField label="Password" name="password" />
+                <TextField label="Password" name="password" type="password" />
               </ColGroup>
             </Row>
             <Row>
               <ColGroup>
-                <TextField label="Conmfirm Password" name="passwordConfirmation" />
+                <TextField label="Confirm Password" name="passwordConfirmation" type="password" />
               </ColGroup>
             </Row>
           </Modal.Body>
