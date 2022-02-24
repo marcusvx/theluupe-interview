@@ -12,15 +12,28 @@ const Post = objectType({
   },
 });
 
+function commonPostInput(t) {
+  t.string('title', { nullable: false });
+  t.string('content', { nullable: false });
+}
+
 const postCreationInput = inputObjectType({
   name: 'PostCreationInput',
   definition(t) {
-    t.string('title', { nullable: false });
-    t.string('content', { nullable: false });
+    commonPostInput(t);
+  },
+});
+
+const postUpdateInput = inputObjectType({
+  name: 'PostUpdateInput',
+  definition(t) {
+    t.string('id', { nullable: false });
+    commonPostInput(t);
   },
 });
 
 module.exports = {
   Post,
   postCreationInput,
+  postUpdateInput,
 };

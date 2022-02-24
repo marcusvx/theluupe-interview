@@ -51,29 +51,47 @@ function Index() {
       <Heading className="mt-5">ACTIVITIES</Heading>
       <ul>
         <li>
-          Update the `dev` NPM Script to allow us to run the App using nodemon (package already installed). `start`
-          Script should remain as it is
+          <del>
+            Update the `dev` NPM Script to allow us to run the App using nodemon (package already installed). `start`
+            Script should remain as it is
+          </del>
         </li>
         <li>Add Post Feature</li>
         <ul>
-          <li>Posts have an Author</li>
-          <li>An Author can have multiple Posts</li>
+          <li>
+            <del>Posts have an Author</del>
+          </li>
+          <li>
+            <del>An Author can have multiple Posts</del>
+          </li>
           <li>We should be able to add, edit and delete Posts</li>
           <li>Add totalPosts per User on the User table</li>
-          <li>Create a view to display all the Posts</li>
+          <li>
+            <del>Create a view to display all the Posts</del>
+          </li>
           <li>Create a view to display all the Posts for a User</li>
         </ul>
-        <li>Allow users to edit their information</li>
-        <li>Add Authentication (login, signup)</li>
+        <li>
+          <del>Allow users to edit their information</del>
+        </li>
+        <li>
+          <del>Add Authentication (login, signup)</del>
+        </li>
         <ul>
-          <li>Display the username on the Header</li>
+          <li>
+            <del>Display the username on the Header</del>
+          </li>
         </ul>
         <li>Improve permissions</li>
         <ul>
-          <li>Everyone can read the Posts (general Posts page)</li>
+          <li>
+            <del>Everyone can read the Posts (general Posts page)</del>
+          </li>
           <li>Only authenticated users can read the Posts per user</li>
           <li>Only the author can edit/delete their posts</li>
-          <li>Only a User can edit their info</li>
+          <li>
+            <del>Only a User can edit their info</del>
+          </li>
         </ul>
         <li>Refresh the tables after adding/removing/modifying an entry</li>
       </ul>

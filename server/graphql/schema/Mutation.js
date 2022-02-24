@@ -79,6 +79,54 @@ const Mutation = mutationType({
       },
     });
 
+    t.field('editPost', {
+      type: 'Post',
+      nulllable: false,
+      args: {
+        postUpdateInput: arg({ type: 'PostUpdateInput', required: true }),
+      },
+      resolve: async (_, { postUpdateInput: { id, content, title } }, ctx) => {
+        try {
+          const { user } = ctx.request.session;
+          if (!user) {
+            throw new Error('User not authenticated');
+          }
+
+          const query = {
+            where: { id },
+            include: {
+              author: true,
+            },
+          };
+
+          const post = ctx.prisma.post.findUnique(query);
+
+          if (post.author.id !== user.id) {
+            throw new Error('A post can only be changed by its creator');
+          }
+
+          const postCreated = await ctx.prisma.post.update({
+            ...query,
+            data: {
+              title,
+              content,
+              updatedAt: new Date(),
+            },
+          });
+
+          return {
+            id: postCreated.id,
+            title: postCreated.title,
+            content: postCreated.content,
+            createdAt: postCreated.createdAt,
+            author: fullName(user),
+          };
+        } catch (error) {
+          throw new Error(error.message);
+        }
+      },
+    });
+
     t.field('editUser', {
       type: 'User',
       nullable: false,
