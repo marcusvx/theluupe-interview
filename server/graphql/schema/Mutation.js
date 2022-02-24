@@ -57,7 +57,7 @@ const Mutation = mutationType({
               updatedAt: new Date(),
               author: {
                 connect: {
-                  email: user.email,
+                  id: user.id,
                 },
               },
             },
@@ -73,6 +73,45 @@ const Mutation = mutationType({
             createdAt: postCreated.createdAt,
             author: fullName(user),
           };
+        } catch (error) {
+          throw new Error(error.message);
+        }
+      },
+    });
+
+    t.field('editUser', {
+      type: 'User',
+      nullable: false,
+      args: {
+        userEditInput: arg({ type: 'UserEditInput', required: true }),
+      },
+      resolve: async (_, { userEditInput: { id, firstName, lastName } }, ctx) => {
+        try {
+          const { session } = ctx.request;
+          const sessionUser = session.user;
+          const dbUser = await ctx.prisma.user.findUnique({
+            where: {
+              id,
+            },
+          });
+          if (dbUser?.id != sessionUser?.id) {
+            throw new Error('User data cannot be changed by another user');
+          }
+
+          const user = await ctx.prisma.user.update({
+            where: {
+              id,
+            },
+            data: {
+              firstName,
+              lastName,
+            },
+          });
+
+          session.user = user;
+          await session.save();
+
+          return user;
         } catch (error) {
           throw new Error(error.message);
         }

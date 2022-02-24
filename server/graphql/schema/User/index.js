@@ -1,9 +1,9 @@
-const { inputObjectType, objectType } = require('nexus');
+const { inputObjectType, objectType, extendInputType } = require('nexus');
 const { fullName } = require('./resolvers');
 
 const User = objectType({
   name: 'User',
-  definition(t) {
+  definition: t => {
     t.model.id();
     t.model.email();
     t.model.firstName();
@@ -12,11 +12,23 @@ const User = objectType({
   },
 });
 
+function commonUserInput(t) {
+  t.string('firstName', { nullable: false });
+  t.string('lastName', { nullable: false });
+}
+
+const userEditInput = inputObjectType({
+  name: 'UserEditInput',
+  definition: t => {
+    t.string('id', { nullable: false });
+    commonUserInput(t);
+  },
+});
+
 const signupInput = inputObjectType({
   name: 'SignupInput',
-  definition(t) {
-    t.string('firstName', { nullable: false });
-    t.string('lastName', { nullable: false });
+  definition: t => {
+    commonUserInput(t);
     t.string('email', { nullable: false });
     t.string('password', { nullable: false });
   },
@@ -25,4 +37,5 @@ const signupInput = inputObjectType({
 module.exports = {
   User,
   signupInput,
+  userEditInput,
 };

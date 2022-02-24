@@ -12,3 +12,9 @@ mutation CreatePost($postCreationInput: PostCreationInput!) {
     ...PostInfo
   }
 }
+
+mutation EditUser($firstName: String!, $lastName: String!, $id: String!) {
+  editUser(userEditInput: { firstName: $firstName, lastName: $lastName, id: $id }) {
+    ...UserInfo
+  }
+}

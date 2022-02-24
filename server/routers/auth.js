@@ -29,16 +29,10 @@ router.postAsync('/login', session, async (req, res) => {
       });
     }
 
-    const userData = {
-      id: user.userId,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-    };
-    req.session.user = userData;
+    req.session.user = user;
     await req.session.save();
 
-    return res.send(userData);
+    return res.send(user);
   } catch (error) {
     return res.status(500).send({ message: error.message });
   }
@@ -60,7 +54,7 @@ router.getAsync('/logout', session, async (req, res) => {
   if (session) {
     session.destroy();
   }
-  
+
   res.json({ status: 'ok' });
 });
 

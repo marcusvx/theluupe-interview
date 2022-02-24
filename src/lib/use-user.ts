@@ -24,7 +24,7 @@ const fetcher = async (url: string): Promise<SessionUser> => {
 };
 
 const useUser = () => {
-  const { data, mutate, error } = useSWR<SessionUser>('/auth/profile', fetcher);
+  const { data, mutate, error } = useSWR('/auth/profile', fetcher);
 
   const loading = !data && !error;
   const loggedOut = error && error.status === 403;
