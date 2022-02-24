@@ -1,4 +1,4 @@
-const { objectType } = require('nexus');
+const { inputObjectType, objectType } = require('nexus');
 
 const Post = objectType({
   name: 'Post',
@@ -12,6 +12,15 @@ const Post = objectType({
   },
 });
 
+const postCreationInput = inputObjectType({
+  name: 'PostCreationInput',
+  definition(t) {
+    t.string('title', { nullable: false });
+    t.string('content', { nullable: false });
+  },
+});
+
 module.exports = {
   Post,
+  postCreationInput,
 };

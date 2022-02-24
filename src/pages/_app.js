@@ -13,6 +13,7 @@ import 'rc-slider/assets/index.css';
 import 'react-day-picker/lib/style.css';
 import 'react-notifications-component/dist/theme.css';
 import '@szhsin/react-menu/dist/index.css';
+import 'react-quill/dist/quill.snow.css';
 
 Router.events.on('routeChangeComplete', () => {
   window.scrollTo(0, 0);

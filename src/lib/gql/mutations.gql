@@ -7,8 +7,8 @@ mutation CreateUser($firstName: String!, $lastName: String!, $email: String!, $p
   }
 }
 
-mutation CreateOnePost($data: PostCreateInput!) {
-  createOnePost(data: $data) {
+mutation CreatePost($postCreationInput: PostCreationInput!) {
+  createPost(postCreationInput: $postCreationInput) {
     ...PostInfo
   }
 }

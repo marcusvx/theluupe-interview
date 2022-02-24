@@ -12,3 +12,8 @@ export const Login = yup.object().shape({
   email: yup.string().email('Please enter a valid email address.'),
   password: yup.string().required('Password is required'),
 });
+
+export const Post = yup.object().shape({
+  title: yup.string().required('Please inform a title.'),
+  content: yup.string().required('The content is required.'),
+});

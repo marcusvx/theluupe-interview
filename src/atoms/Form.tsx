@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
+import { Field, Formik, Form } from 'formik';
 import BootstrapForm from 'react-bootstrap/Form';
 import { FormGroupProps } from 'react-bootstrap/FormGroup';
 import Col from 'react-bootstrap/Col';
@@ -16,4 +16,4 @@ function ColGroup({ children, ...props }: IColGroupProps): JSX.Element {
   );
 }
 
-export { Formik, Form, Row, Col, Group, ColGroup, Label };
+export { Field, Formik, Form, Row, Col, Group, ColGroup, Label };

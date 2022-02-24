@@ -11,6 +11,9 @@ const { schema, context } = require('./graphql');
 const { permissionsMiddleware } = require('./graphql/middleware/permissions');
 const { nextApp, nextMiddleware } = require('./routers/next');
 const { authRouter } = require('./routers/auth');
+const { sessionOptions } = require('./lib/auth');
+const { ironSession } = require('iron-session/express');
+
 const prisma = require('./lib/prisma');
 
 Graceful.captureExceptions = true;
@@ -46,6 +49,8 @@ async function start() {
     gqlServer.express.use(basePaths.auth, authRouter);
     // Add Next.js routes to GraphQL server base
     gqlServer.use(nextMiddleware(Object.values(basePaths)));
+    gqlServer.use(ironSession(sessionOptions));
+
     await gqlServer.start({
       port,
       endpoint: basePaths.gql,
