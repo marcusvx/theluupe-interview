@@ -13,7 +13,7 @@ const NewPost = () => {
   const { data, loading } = useQuery(GetPost, { variables: { id: postid } });
 
   console.log(data, postid, loading);
-  return <PublicLayout loading={loading}>{data && <PostView post={data}></PostView>}</PublicLayout>;
+  return <PublicLayout loading={loading}>{data?.post && <PostView post={data.post}></PostView>}</PublicLayout>;
 };
 
 // eslint-disable-next-line import/no-default-export

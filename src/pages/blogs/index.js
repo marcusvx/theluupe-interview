@@ -1,22 +1,20 @@
 import React from 'react';
-import { Card, Container, Row, Col } from 'react-bootstrap';
 
 import { PublicLayout } from '@templates/Layout';
 import { withApollo } from '@lib/apollo';
+import { GetPosts } from '@lib/gql/queries.gql';
+import { useQuery } from '@apollo/react-hooks';
+import { BlogList } from '@organisms/BlogList';
 
 const Posts = () => {
+  const { data, loading } = useQuery(GetPosts);
+
   return (
-    <PublicLayout loading={false}>
-      <Container fluid="sm">
-        <Row>
-          <Col>
-            <Card>
-              <Card.Title>Blog Posts</Card.Title>
-              <Card.Body>Blog Posts</Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+    <PublicLayout loading={loading}>
+      <div className="pl-4">
+        <span className="h2">Blog</span>
+      </div>
+      {data?.posts && <BlogList posts={data.posts}></BlogList>}
     </PublicLayout>
   );
 };

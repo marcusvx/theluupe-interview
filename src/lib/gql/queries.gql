@@ -8,6 +8,12 @@ query GetUsers {
 
 query GetPost($id: String!) {
   post(where: { id: $id }) {
-    ...PostInfo
+    ...PostDetail
+  }
+}
+
+query GetPosts {
+  posts {
+    ...PostListItem
   }
 }

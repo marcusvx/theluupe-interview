@@ -6,12 +6,16 @@ fragment UserInfo on User {
   fullName
 }
 
-fragment PostInfo on Post {
+fragment PostListItem on Post {
   id
   title
   createdAt
-  content
   author {
     fullName
   }
+}
+
+fragment PostDetail on Post {
+  content
+  ...PostListItem
 }

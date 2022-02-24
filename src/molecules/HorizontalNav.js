@@ -41,6 +41,11 @@ export function HorizontalNav() {
               MAGAZINE
             </a>
           </Nav.Item>
+          <Nav.Item className="mr-1">
+            <Link href="/blogs">
+              <a className="nav-link">Blog</a>
+            </Link>
+          </Nav.Item>
         </div>
         {!loggedOut && <UserMenu />}
         {loggedOut && (
