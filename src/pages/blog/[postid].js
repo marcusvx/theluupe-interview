@@ -1,28 +1,19 @@
 import React from 'react';
-import { Card, Container, Row, Col } from 'react-bootstrap';
 
 import { PublicLayout } from '@templates/Layout';
 import { withApollo } from '@lib/apollo';
 import { useRouter } from 'next/router';
+import { GetPost } from '@lib/gql/queries.gql';
+import { useQuery } from '@apollo/react-hooks';
+import { PostView } from '@organisms/PostView';
 
 const NewPost = () => {
   const router = useRouter();
   const { postid } = router.query;
+  const { data, loading } = useQuery(GetPost, { variables: { id: postid } });
 
-  return (
-    <PublicLayout loading={false}>
-      <Container fluid="sm">
-        <Row>
-          <Col>
-            <Card>
-              <Card.Title>Post {postid}</Card.Title>
-              <Card.Body>Blog</Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </PublicLayout>
-  );
+  console.log(data, postid, loading);
+  return <PublicLayout loading={loading}>{data && <PostView post={data}></PostView>}</PublicLayout>;
 };
 
 // eslint-disable-next-line import/no-default-export
