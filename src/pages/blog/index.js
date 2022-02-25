@@ -2,7 +2,7 @@ import React from 'react';
 
 import { PublicLayout } from '@templates/Layout';
 import { withApollo } from '@lib/apollo';
-import { GetPosts } from '@lib/gql/queries.gql';
+import { GetPosts } from '@lib/gql/queries';
 import { useQuery } from '@apollo/react-hooks';
 import { BlogList } from '@organisms/BlogList';
 

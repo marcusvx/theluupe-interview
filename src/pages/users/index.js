@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
 import { withApollo } from '@lib/apollo';
-import { GetUsers } from '@lib/gql/queries.gql';
+import { GetUsers } from '@lib/gql/queries';
 
 import { PublicLayout } from '@templates/Layout';
 import { UsersManager } from '@templates/UsersManager';

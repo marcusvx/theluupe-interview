@@ -3,7 +3,7 @@ import React from 'react';
 import { PublicLayout } from '@templates/Layout';
 import { withApollo } from '@lib/apollo';
 import { useRouter } from 'next/router';
-import { GetPost } from '@lib/gql/queries.gql';
+import { GetPost } from '@lib/gql/queries';
 import { useQuery } from '@apollo/react-hooks';
 import { PostView } from '@organisms/PostView';
 

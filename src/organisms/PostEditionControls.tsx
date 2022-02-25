@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState, useCallback } from 'react';
 import { DeleteModal } from './DeleteModal';
 import { useMutation } from '@apollo/react-hooks';
-import { DeletePost } from '@lib/gql/mutations.gql';
+import { DeletePost } from '@lib/gql/mutations';
 import { Button } from 'react-bootstrap';
 import { addNotification } from '@lib/notifications';
 

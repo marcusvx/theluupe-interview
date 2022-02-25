@@ -63,7 +63,7 @@ const nextConfig = {
     // TODO: remove when using only typescript
     // allow using all file extensions while we transition into full typescript
     // eslint-disable-next-line no-param-reassign
-    config.resolve.extensions = ['.ts', '.tsx', '.js', '.jsx'];
+    config.resolve.extensions = ['.mjs', '.ts', '.tsx', '.js', '.jsx'];
 
     return config;
   },

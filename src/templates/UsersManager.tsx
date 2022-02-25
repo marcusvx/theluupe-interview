@@ -29,7 +29,7 @@ export function UsersManager({ users }: IUsersManagerProps): JSX.Element {
         Add User
       </CustomButton>
 
-      <Table data={users} columns={columns} />
+      <Table data={users} columns={columns} className="" />
 
       <AddUserModal show={showUserModal} onClose={userModalOnCloseHandler} />
     </>

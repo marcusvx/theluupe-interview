@@ -6,7 +6,7 @@ import { withApollo } from '@lib/apollo';
 import { useRouter } from 'next/router';
 import { BlogList } from '@organisms/BlogList';
 import { useQuery } from '@apollo/react-hooks';
-import { GetPostsByAuthor } from '@lib/gql/queries.gql';
+import { GetPostsByAuthor } from '@lib/gql/queries';
 import useUser from '@lib/use-user';
 
 const PostsByAuthor = () => {

@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { SessionUser } from '@dal/SessionUser';
 import { UserEdit as UserSchema } from '@shared/validation/schemas';
-import { EditUser } from '@lib/gql/mutations.gql';
+import { EditUser } from '@lib/gql/mutations';
 
 import { ColGroup, Form, Formik, Row } from '@atoms/Form';
 import { SubmitButton } from '@molecules/forms/SubmitButton';

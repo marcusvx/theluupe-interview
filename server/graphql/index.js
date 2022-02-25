@@ -5,7 +5,17 @@ const types = require('./schema');
 
 const schema = makeSchema({
   types,
-  plugins: [declarativeWrappingPlugin(), nexusPrisma({ experimentalCRUD: true, paginationStrategy: 'prisma' })],
+  plugins: [
+    declarativeWrappingPlugin(),
+    nexusPrisma({
+      experimentalCRUD: true,
+      paginationStrategy: 'prisma',
+      shouldGenerateArtifacts: true,
+      outputs: {
+        typegen: __dirname + '/server/graphql/generated',
+      },
+    }),
+  ],
   outputs: {
     schema: `${__dirname}/generated/schema.graphql`,
     typegen: `${__dirname}/generated/nexus.ts`,

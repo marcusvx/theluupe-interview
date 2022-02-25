@@ -4,7 +4,7 @@ import { Card, Container, Row, Col } from 'react-bootstrap';
 import { PublicLayout } from '@templates/Layout';
 import { PostForm } from '@organisms/PostForm';
 import { withApollo } from '@lib/apollo';
-import { GetPost } from '@lib/gql/queries.gql';
+import { GetPost } from '@lib/gql/queries';
 import { useQuery } from '@apollo/react-hooks';
 import { useRouter } from 'next/router';
 
