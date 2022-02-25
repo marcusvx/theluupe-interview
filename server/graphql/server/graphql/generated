@@ -22,17 +22,17 @@ interface NexusPrismaInputs {
   Query: {
     users: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'email' | 'firstName' | 'lastName' | 'posts' | 'password'
-      ordering: 'id' | 'email' | 'firstName' | 'lastName' | 'password'
+      ordering: 'id' | 'email' | 'firstName' | 'lastName' | 'posts' | 'password'
     }
     posts: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'content' | 'author' | 'authorId'
-      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'content' | 'authorId'
+      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'content' | 'author' | 'authorId'
     }
   },
   User: {
     posts: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'createdAt' | 'updatedAt' | 'title' | 'content' | 'author' | 'authorId'
-      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'content' | 'authorId'
+      ordering: 'id' | 'createdAt' | 'updatedAt' | 'title' | 'content' | 'author' | 'authorId'
     }
   }
   Post: {

@@ -101,14 +101,22 @@ function Index() {
             <del>Only a User can edit their info</del>
           </li>
         </ul>
-        <li>Refresh the tables after adding/removing/modifying an entry</li>
+        <li>
+          <del>Refresh the tables after adding/removing/modifying an entry</del>
+        </li>
       </ul>
 
       <Heading className="mt-3">NICE TO HAVE</Heading>
       <ul>
-        <li>Solve the n+1 problem while fetching All the users will all their Posts</li>
-        <li>Create prisma Seeds and a NPM Script to add them to our DB</li>
-        <li>Paginate the tables</li>
+        <li>
+          <del>Solve the n+1 problem while fetching All the users will all their Posts</del>
+        </li>
+        <li>
+          <del>Create prisma Seeds and a NPM Script to add them to our DB</del>
+        </li>
+        <li>
+          <del>Paginate the tables</del>
+        </li>
       </ul>
     </PublicLayout>
   );

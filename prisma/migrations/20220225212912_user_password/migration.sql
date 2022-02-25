@@ -5,7 +5,7 @@ CREATE TABLE "new_User" (
     "email" TEXT NOT NULL,
     "firstName" TEXT,
     "lastName" TEXT,
-    "password" TEXT NOT NULL DEFAULT '$2a$10$MgTniVfxP/V.9mRlN2TuTuCwufGjKKHxvaRYqqyd1dvS4pZBLngQC'
+    "password" TEXT NOT NULL DEFAULT '$2b$10$t9z2hwiQR/GmGQ/crs2VJ.IBo9AHDsEifT3tg5orsThSV6oYU9PZa'
 );
 INSERT INTO "new_User" ("email", "firstName", "id", "lastName") SELECT "email", "firstName", "id", "lastName" FROM "User";
 DROP TABLE "User";
