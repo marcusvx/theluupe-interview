@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { PublicLayout } from '@templates/Layout';
 import { withApollo } from '@lib/apollo';
 import { GetPosts } from '@lib/gql/queries';
 import { useQuery } from '@apollo/react-hooks';
 import { BlogList } from '@organisms/BlogList';
+import Button from 'react-bootstrap/Button';
+
+const TAKE = 5;
 
 const Posts = () => {
-  const { data, loading } = useQuery(GetPosts);
+  const { data, loading, fetchMore } = useQuery(GetPosts, {
+    variables: {
+      take: TAKE,
+      skip: 0,
+    },
+  });
+
+  const loadMore = () => {
+    fetchMore({
+      variables: {
+        skip: data.posts.length,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
+        return Object.assign({}, prev, {
+          posts: [...prev.posts, ...fetchMoreResult.posts],
+        });
+      },
+    });
+  };
 
   return (
     <PublicLayout loading={loading}>
@@ -18,6 +40,10 @@ const Posts = () => {
       </div>
 
       {data?.posts && <BlogList posts={data.posts}></BlogList>}
+
+      <Button variant="secondary" onClick={loadMore}>
+        Load More
+      </Button>
     </PublicLayout>
   );
 };

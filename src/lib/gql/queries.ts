@@ -21,8 +21,8 @@ const GetPost = gql`
 
 const GetPosts = gql`
   ${PostListItem}
-  query GetPosts {
-    posts {
+  query GetPosts($take: Int!, $skip: Int!) {
+    posts(take: $take, skip: $skip) {
       ...PostListItem
     }
   }
