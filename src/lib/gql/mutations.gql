@@ -19,8 +19,14 @@ mutation EditUser($firstName: String!, $lastName: String!, $id: String!) {
   }
 }
 
-mutation EditPost($title: String!, $content: String!, $id: String!) {
-  editPost(postUpdateInput: { title: $title, content: $content, id: $id }) {
+mutation EditPost($postUpdateInput: PostUpdateInput!) {
+  editPost(postUpdateInput: $postUpdateInput) {
     ...PostDetail
+  }
+}
+
+mutation DeletePost($id: String!) {
+  deletePost(objectDeleteInput: { id: $id }) {
+    id
   }
 }

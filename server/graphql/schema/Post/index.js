@@ -32,6 +32,7 @@ const postUpdateInput = inputObjectType({
   },
 });
 
+
 module.exports = {
   Post,
   postCreationInput,

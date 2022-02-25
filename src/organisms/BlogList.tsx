@@ -1,21 +1,24 @@
+import React from 'react';
 import { Card, Container, Row, Col } from 'react-bootstrap';
 import { BlogPost } from '@dal/BlogPost';
 import Link from 'next/link';
 import Moment from 'react-moment';
 import styled from '@emotion/styled';
 import { Icon } from '@atoms/Icon';
+import useUser from '@lib/use-user';
+import { PostEditionControls } from './PostEditionControls';
 
 interface BlogListProps {
   posts: ReadonlyArray<BlogPost>;
 }
 const BlogList = ({ posts }: BlogListProps) => {
-  console.log(posts);
+  const { user, loggedOut } = useUser();
 
   return (
     <Container fluid>
       <Row>
         {posts.map(post => (
-          <Col>
+          <Col key={post.id}>
             <BlogPostCard>
               <Card.Body>
                 <Card.Title>
@@ -24,16 +27,19 @@ const BlogList = ({ posts }: BlogListProps) => {
                   </Link>
                 </Card.Title>
                 <Card.Text>
-                  <div>
-                    <span>Posted</span> by <strong>{post.author.fullName}</strong> on{' '}
-                    <Moment format="MMMM DD, YYYY">{post.createdAt}</Moment>
-                  </div>
+                  <span>Posted</span> by <strong>{post.author.fullName}</strong> on{' '}
+                  <Moment format="MMMM DD, YYYY">{post.createdAt}</Moment>
                 </Card.Text>
-                <Link href={`blog/${post.id}`}>
-                  <a className="text-brand-red">
-                    Read more <Icon className="ml-2" icon="next" size={12} color="var(--brand-bubble)" />
-                  </a>
-                </Link>
+                <div className="d-flex justify-content-between">
+                  <Link href={`blog/${post.id}`}>
+                    <a className="text-brand-red">
+                      Read more <Icon className="ml-2" icon="next" size={12} color="var(--brand-bubble)" />
+                    </a>
+                  </Link>
+                  {!loggedOut && user?.id === post.author.id && (
+                    <PostEditionControls postId={post.id}></PostEditionControls>
+                  )}
+                </div>
               </Card.Body>
             </BlogPostCard>
           </Col>

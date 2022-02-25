@@ -12,7 +12,7 @@ const Posts = () => {
 
   return (
     <PublicLayout loading={loading}>
-      <div class="d-flex justify-content-between">
+      <div className="d-flex justify-content-between">
         <div className="pl-4">
           <span className="h2">Blog</span>
         </div>

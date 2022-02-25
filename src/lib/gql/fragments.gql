@@ -12,6 +12,7 @@ fragment PostListItem on Post {
   createdAt
   author {
     fullName
+    id
   }
 }
 

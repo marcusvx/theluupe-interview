@@ -4,8 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { PostInput } from '@dal/PostInput';
 import { Post as PostSchema } from '@shared/validation/schemas';
-import { CreatePost } from '@lib/gql/mutations.gql';
-import { EditPost } from '@lib/gql/mutations.gql';
+import { CreatePost, EditPost } from '@lib/gql/mutations.gql';
 
 import { ColGroup, Field, Form, Formik, Row } from '@atoms/Form';
 import { SubmitButton } from '@molecules/forms/SubmitButton';
@@ -19,14 +18,15 @@ interface PostFormProps {
 }
 
 export function PostForm({ post }: PostFormProps): JSX.Element {
-  const [createPost] = useMutation(CreatePost);
+  const [createPost] = useMutation(CreatePost, {
+    refetchQueries: ['GetPosts'],
+  });
   const [editPost] = useMutation(EditPost);
   const initialValues: PostInput = { content: post?.content ?? '', title: post?.title ?? '' };
   const router = useRouter();
 
   const handleSubmit = useCallback(async (postInput: Partial<PostInput>): Promise<void> => {
     const { id } = await createOrEdit(postInput);
-    console.log(id);
     router.push(`/blog/${id}`);
   }, []);
 

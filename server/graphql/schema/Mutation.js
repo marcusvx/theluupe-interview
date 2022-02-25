@@ -99,8 +99,7 @@ const Mutation = mutationType({
             },
           };
 
-          const post = ctx.prisma.post.findUnique(query);
-
+          const post = await ctx.prisma.post.findUnique(query);
           if (post.author.id !== user.id) {
             throw new Error('A post can only be changed by its creator');
           }
@@ -156,8 +155,8 @@ const Mutation = mutationType({
             },
           });
 
-          session.user = user;
-          await session.save();
+          ctx.request.session.user = user;
+          await ctx.request.session.save();
 
           return user;
         } catch (error) {
@@ -165,8 +164,43 @@ const Mutation = mutationType({
         }
       },
     });
+
+    t.field('deletePost', {
+      type: 'Post',
+      nullable: false,
+      args: {
+        objectDeleteInput: arg({ type: 'ObjectDeleteInput', required: true }),
+      },
+      resolve: async (_, { objectDeleteInput: { id } }, ctx) => {
+        try {
+          assertUserIsAuthorized(ctx);
+          await ctx.prisma.post.delete({
+            where: {
+              id,
+            },
+          });
+
+          return { id };
+        } catch (error) {
+          throw new Error(error.message);
+        }
+      },
+    });
   },
 });
+
+async function assertUserIsAuthorized(ctx) {
+  const { session } = ctx.request;
+  const sessionUser = session.user;
+  const dbUser = await ctx.prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+  if (dbUser?.id != sessionUser?.id) {
+    throw new Error('User data cannot be changed by another user');
+  }
+}
 
 module.exports = {
   Mutation,
