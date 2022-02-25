@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import { Icon } from '@atoms/Icon';
 import useUser from '@lib/use-user';
 import { useRouter } from 'next/router';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 const UserMenu = () => {
   const { user, mutate, loggedOut } = useUser();
@@ -24,15 +25,18 @@ const UserMenu = () => {
   return (
     <>
       <Nav.Item className="mr-1">
-        <Link href="/profile">
-          <a className="btn btn-secondary">
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
             <Icon className="mr-2" icon="user" size={12} color="var(--brand-bubble)" />
-            {`${firstName} ${lastName}`}
-          </a>
-        </Link>
-        <button onClick={handleLogout} className="btn btn-primary text-white ml-3">
-          Sign Out
-        </button>
+            {`${firstName} ${lastName}`}{' '}
+            <Icon className="mr-2" icon="chevron-down" size={12} color="var(--brand-bubble)" />
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="/users">Users</Dropdown.Item>
+            <Dropdown.Item onClick={handleLogout}>Sign Out</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Nav.Item>
     </>
   );
