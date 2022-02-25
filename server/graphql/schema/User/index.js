@@ -1,5 +1,5 @@
 const { inputObjectType, objectType, extendInputType } = require('nexus');
-const { fullName } = require('./resolvers');
+const { fullName, totalPosts } = require('./resolvers');
 
 const User = objectType({
   name: 'User',
@@ -8,6 +8,7 @@ const User = objectType({
     t.model.email();
     t.model.firstName();
     t.model.lastName();
+    t.int('totalPosts', { resolve: totalPosts });
     t.string('fullName', { resolve: fullName });
   },
 });

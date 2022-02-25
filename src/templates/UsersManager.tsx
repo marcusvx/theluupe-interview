@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import styled from '@emotion/styled';
 import { Button } from 'react-bootstrap';
 
-
 import { IUser } from '@dal/User';
 
 import { Table } from '@molecules/Table';
@@ -14,7 +13,8 @@ type IUsersManagerProps = {
 
 const columns = [
   { Header: 'Email', accessor: 'email' },
-  { Header: 'FullName', accessor: 'fullName' },
+  { Header: 'Full Name', accessor: 'fullName' },
+  { Header: 'Total Posts', accessor: 'totalPosts' },
 ];
 
 export function UsersManager({ users }: IUsersManagerProps): JSX.Element {
@@ -31,10 +31,7 @@ export function UsersManager({ users }: IUsersManagerProps): JSX.Element {
 
       <Table data={users} columns={columns} />
 
-      <AddUserModal
-        show={showUserModal}
-        onClose={userModalOnCloseHandler}
-      />
+      <AddUserModal show={showUserModal} onClose={userModalOnCloseHandler} />
     </>
   );
 }

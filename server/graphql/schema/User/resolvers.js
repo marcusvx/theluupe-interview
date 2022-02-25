@@ -6,6 +6,12 @@ function fullName(parent) {
   return null;
 }
 
+function totalPosts(parent) {
+  const { _count } = parent;
+  return _count ? _count.posts : 0;
+}
+
 module.exports = {
   fullName,
+  totalPosts,
 };

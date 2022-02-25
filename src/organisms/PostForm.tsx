@@ -12,6 +12,7 @@ import { TextField } from '@molecules/forms/TextField';
 import RichTextEditor from '@molecules/forms/RichTextEditor';
 import { useRouter } from 'next/router';
 import { BlogPost } from '@dal/BlogPost';
+import { addNotification } from '@lib/notifications';
 
 interface PostFormProps {
   post?: BlogPost;
@@ -27,6 +28,7 @@ export function PostForm({ post }: PostFormProps): JSX.Element {
 
   const handleSubmit = useCallback(async (postInput: Partial<PostInput>): Promise<void> => {
     const { id } = await createOrEdit(postInput);
+
     router.push(`/blog/${id}`);
   }, []);
 
@@ -63,6 +65,8 @@ export function PostForm({ post }: PostFormProps): JSX.Element {
         },
       });
 
+      addNotification({ type: 'success', title: '', message: 'Post updated successfully' });
+
       return data.editPost;
     }
 
@@ -71,6 +75,9 @@ export function PostForm({ post }: PostFormProps): JSX.Element {
         postCreationInput: { ...postInput },
       },
     });
+
+    addNotification({ type: 'success', title: '', message: 'Post created successfully' });
+
     return data.createPost;
   }
 }

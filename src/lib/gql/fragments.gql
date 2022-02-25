@@ -4,6 +4,7 @@ fragment UserInfo on User {
   firstName
   lastName
   fullName
+  totalPosts
 }
 
 fragment PostListItem on Post {

@@ -4,6 +4,7 @@ import { DeleteModal } from './DeleteModal';
 import { useMutation } from '@apollo/react-hooks';
 import { DeletePost } from '@lib/gql/mutations.gql';
 import { Button } from 'react-bootstrap';
+import { addNotification } from '@lib/notifications';
 
 interface PostEditionControlsProps {
   postId: string;
@@ -18,6 +19,7 @@ const PostEditionControls = ({ postId }: PostEditionControlsProps) => {
   const closeModal = () => setShowUserModal(false);
   const handleConfirm = useCallback(async () => {
     await deletePost({ variables: { id: postId } });
+    addNotification({ type: 'success', title: '', message: 'Post deleted successfully' });
   }, []);
 
   return (

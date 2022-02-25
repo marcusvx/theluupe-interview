@@ -10,7 +10,6 @@ const r = {
 
 const permissions = {
   Query: {
-    user: r.isAnybody,
     users: r.isAuthenticatedUser,
     posts: r.isAnybody,
     post: r.isAnybody,

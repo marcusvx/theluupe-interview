@@ -10,6 +10,7 @@ import { SubmitButton } from '@molecules/forms/SubmitButton';
 import { TextField } from '@molecules/forms/TextField';
 import useUser from '@lib/use-user';
 import { useRouter } from 'next/router';
+import { addNotification } from '@lib/notifications';
 
 export function LoginForm(): JSX.Element {
   const initialValues = { email: '', password: '' };
@@ -35,6 +36,12 @@ export function LoginForm(): JSX.Element {
       },
     });
 
+    if (!result.ok) {
+      addNotification({ message: 'Login failed' });
+      return;
+    }
+
+    addNotification({ type: 'success', title: '', message: 'Login succeeded' });
     mutate();
   }, []);
 
@@ -56,9 +63,6 @@ export function LoginForm(): JSX.Element {
           </Modal.Body>
           <Modal.Footer>
             <SubmitButton>Login</SubmitButton>
-            <Button disabled={isSubmitting} variant="secondary">
-              Cancel
-            </Button>
           </Modal.Footer>
         </Form>
       )}

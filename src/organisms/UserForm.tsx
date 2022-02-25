@@ -17,19 +17,17 @@ export type IUserFormProps = {
 };
 
 export function UserForm({ onSubmit, onCancel }: IUserFormProps): JSX.Element {
-  const [createUser] = useMutation(CreateUser);
+  const [createUser] = useMutation(CreateUser, { refetchQueries: ['GetUsers'] });
   const initialValues = {};
 
   const handleSubmit = useCallback(
     async (user: Partial<IUser>) => {
-      const createResults = await createUser({
+      await createUser({
         variables: {
           ...user,
         },
       });
-      if (createResults.errors) {
-        return;
-      }
+
       onSubmit();
     },
     [onSubmit, createUser],
