@@ -12,7 +12,6 @@ const NewPost = () => {
   const { postid } = router.query;
   const { data, loading } = useQuery(GetPost, { variables: { id: postid } });
 
-  console.log(data, postid, loading);
   return <PublicLayout loading={loading}>{data?.post && <PostView post={data.post}></PostView>}</PublicLayout>;
 };
 

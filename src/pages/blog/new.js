@@ -8,11 +8,11 @@ import { withApollo } from '@lib/apollo';
 const NewPost = () => {
   return (
     <PublicLayout loading={false}>
+      <h2>New Post</h2>
       <Container fluid="sm">
         <Row>
           <Col>
             <Card>
-              <Card.Title>New Post</Card.Title>
               <Card.Body>
                 <PostForm />
               </Card.Body>

@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { PostInput } from '@dal/PostInput';
 import { Post as PostSchema } from '@shared/validation/schemas';
 import { CreatePost } from '@lib/gql/mutations.gql';
+import { EditPost } from '@lib/gql/mutations.gql';
 
 import { ColGroup, Field, Form, Formik, Row } from '@atoms/Form';
 import { SubmitButton } from '@molecules/forms/SubmitButton';
@@ -13,19 +14,20 @@ import RichTextEditor from '@molecules/forms/RichTextEditor';
 import { useRouter } from 'next/router';
 import { BlogPost } from '@dal/BlogPost';
 
-export function PostForm(): JSX.Element {
+interface PostFormProps {
+  post?: BlogPost;
+}
+
+export function PostForm({ post }: PostFormProps): JSX.Element {
   const [createPost] = useMutation(CreatePost);
-  const initialValues: PostInput = { content: '', title: '' };
+  const [editPost] = useMutation(EditPost);
+  const initialValues: PostInput = { content: post?.content ?? '', title: post?.title ?? '' };
   const router = useRouter();
 
-  const handleSubmit = useCallback(async (post: Partial<PostInput>): Promise<void> => {
-    const { data } = await createPost({
-      variables: {
-        postCreationInput: { ...post },
-      },
-    });
-
-    router.push(`/blog/${data.createPost.id}`);
+  const handleSubmit = useCallback(async (postInput: Partial<PostInput>): Promise<void> => {
+    const { id } = await createOrEdit(postInput);
+    console.log(id);
+    router.push(`/blog/${id}`);
   }, []);
 
   return (
@@ -48,12 +50,27 @@ export function PostForm(): JSX.Element {
           </Row>
 
           <SubmitButton>Save</SubmitButton>
-
-          <Button disabled={isSubmitting} variant="secondary">
-            Cancel
-          </Button>
         </Form>
       )}
     </Formik>
   );
+
+  async function createOrEdit(postInput: Partial<PostInput>): Promise<BlogPost> {
+    if (post?.id) {
+      const { data } = await editPost({
+        variables: {
+          postUpdateInput: { ...postInput, id: post.id },
+        },
+      });
+
+      return data.editPost;
+    }
+
+    const { data } = await createPost({
+      variables: {
+        postCreationInput: { ...postInput },
+      },
+    });
+    return data.createPost;
+  }
 }

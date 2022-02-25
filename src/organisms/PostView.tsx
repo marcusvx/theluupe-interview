@@ -1,5 +1,5 @@
 import { BlogPost } from '@dal/BlogPost';
-import { Card, Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Moment from 'react-moment';
 
 interface PostViewProps {

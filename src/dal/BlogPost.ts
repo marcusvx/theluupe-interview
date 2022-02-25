@@ -3,5 +3,5 @@ export interface BlogPost {
   title: string;
   content: string;
   createdAt: string;
-  author: string;
+  author: { fullName: string };
 }

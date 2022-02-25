@@ -12,7 +12,7 @@ export function SubmitButton({ children }: ISubmitButtonProps): JSX.Element {
   const shouldDisable = isSubmitting || hasCheckedError;
 
   return (
-    <div className="d-flex align-items-center mt-3">
+    <div className="d-flex align-items-center">
       <Button type="submit" disabled={shouldDisable}>
         {children}
       </Button>

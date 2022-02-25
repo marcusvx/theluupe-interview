@@ -9,12 +9,18 @@ mutation CreateUser($firstName: String!, $lastName: String!, $email: String!, $p
 
 mutation CreatePost($postCreationInput: PostCreationInput!) {
   createPost(postCreationInput: $postCreationInput) {
-    ...PostInfo
+    ...PostDetail
   }
 }
 
 mutation EditUser($firstName: String!, $lastName: String!, $id: String!) {
   editUser(userEditInput: { firstName: $firstName, lastName: $lastName, id: $id }) {
     ...UserInfo
+  }
+}
+
+mutation EditPost($title: String!, $content: String!, $id: String!) {
+  editPost(postUpdateInput: { title: $title, content: $content, id: $id }) {
+    ...PostDetail
   }
 }

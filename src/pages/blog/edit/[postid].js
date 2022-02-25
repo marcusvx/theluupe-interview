@@ -6,22 +6,23 @@ import { PostForm } from '@organisms/PostForm';
 import { withApollo } from '@lib/apollo';
 import { GetPost } from '@lib/gql/queries.gql';
 import { useQuery } from '@apollo/react-hooks';
+import { useRouter } from 'next/router';
 
 const NewPost = () => {
-    const router = useRouter();
+  const router = useRouter();
   const { postid } = router.query;
   const { data, loading } = useQuery(GetPost, { variables: { id: postid } });
 
   return (
-    <PublicLayout loading={false}>
+    <PublicLayout loading={loading}>
+      <h2>Edit Post</h2>
+
       <Container fluid="sm">
         <Row>
           <Col>
             <Card>
-              <Card.Title>New Post</Card.Title>
-              <Card.Body>
-                <PostForm />
-              </Card.Body>
+              <Card.Title></Card.Title>
+              <Card.Body>{data?.post && <PostForm post={data.post} />}</Card.Body>
             </Card>
           </Col>
         </Row>
