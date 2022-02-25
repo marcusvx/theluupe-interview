@@ -64,12 +64,16 @@ function Index() {
           <li>
             <del>An Author can have multiple Posts</del>
           </li>
-          <li>We should be able to add, edit and delete Posts</li>
+          <li>
+            <del>We should be able to add, edit and delete Posts</del>
+          </li>
           <li>Add totalPosts per User on the User table</li>
           <li>
             <del>Create a view to display all the Posts</del>
           </li>
-          <li>Create a view to display all the Posts for a User</li>
+          <li>
+            <del>Create a view to display all the Posts for a User</del>
+          </li>
         </ul>
         <li>
           <del>Allow users to edit their information</del>
@@ -87,8 +91,12 @@ function Index() {
           <li>
             <del>Everyone can read the Posts (general Posts page)</del>
           </li>
-          <li>Only authenticated users can read the Posts per user</li>
-          <li>Only the author can edit/delete their posts</li>
+          <li>
+            <del>Only authenticated users can read the Posts per user</del>
+          </li>
+          <li>
+            <del>Only the author can edit/delete their posts</del>
+          </li>
           <li>
             <del>Only a User can edit their info</del>
           </li>

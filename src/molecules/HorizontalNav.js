@@ -42,7 +42,7 @@ export function HorizontalNav() {
             </a>
           </Nav.Item>
           <Nav.Item className="mr-1">
-            <Link href="/blogs">
+            <Link href="/blog">
               <a className="nav-link">Blog</a>
             </Link>
           </Nav.Item>

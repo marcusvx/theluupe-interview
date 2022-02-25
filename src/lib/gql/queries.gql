@@ -17,3 +17,9 @@ query GetPosts {
     ...PostListItem
   }
 }
+
+query GetPostsByAuthor($id: StringFilter!) {
+  posts(where: { author: { id: $id } }) {
+    ...PostListItem
+  }
+}

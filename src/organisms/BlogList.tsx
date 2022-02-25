@@ -2,11 +2,11 @@ import React from 'react';
 import { Card, Container, Row, Col } from 'react-bootstrap';
 import { BlogPost } from '@dal/BlogPost';
 import Link from 'next/link';
-import Moment from 'react-moment';
 import styled from '@emotion/styled';
 import { Icon } from '@atoms/Icon';
 import useUser from '@lib/use-user';
 import { PostEditionControls } from './PostEditionControls';
+import { PostInfo } from '@molecules/PostInfo';
 
 interface BlogListProps {
   posts: ReadonlyArray<BlogPost>;
@@ -16,6 +16,14 @@ const BlogList = ({ posts }: BlogListProps) => {
 
   return (
     <Container fluid>
+      {!loggedOut && user && (
+        <div className="pr-4">
+          <Link href="/blog/new">
+            <a className="btn btn-secondary">New Post</a>
+          </Link>
+        </div>
+      )}
+
       <Row>
         {posts.map(post => (
           <Col key={post.id}>
@@ -27,8 +35,7 @@ const BlogList = ({ posts }: BlogListProps) => {
                   </Link>
                 </Card.Title>
                 <Card.Text>
-                  <span>Posted</span> by <strong>{post.author.fullName}</strong> on{' '}
-                  <Moment format="MMMM DD, YYYY">{post.createdAt}</Moment>
+                  <PostInfo author={post.author} date={post.createdAt}></PostInfo>
                 </Card.Text>
                 <div className="d-flex justify-content-between">
                   <Link href={`blog/${post.id}`}>

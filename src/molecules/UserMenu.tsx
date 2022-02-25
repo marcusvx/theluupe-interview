@@ -16,7 +16,7 @@ const UserMenu = () => {
   const { firstName, lastName } = user!;
 
   const handleLogout = async () => {
-    await fetch('auth/logout');
+    await fetch('/auth/logout');
     mutate();
     router.push('/');
   };
