@@ -6,9 +6,19 @@ import { GetUsers } from '@lib/gql/queries.gql';
 
 import { PublicLayout } from '@templates/Layout';
 import { UsersManager } from '@templates/UsersManager';
+import useUser from '@lib/use-user';
+import { useRouter } from 'next/router';
 
 function Users() {
+  const { loggedOut } = useUser();
+  const router = useRouter();
   const { data, loading } = useQuery(GetUsers);
+
+  if (loggedOut) {
+    router.push('/');
+    return null;
+  }
+
   const users = data?.users || [];
 
   return (

@@ -27,51 +27,55 @@ export function UserForm({ onSubmit, onCancel }: IUserFormProps): JSX.Element {
           ...user,
         },
       });
+      if (createResults.errors) {
+        return;
+      }
       onSubmit();
-      return createResults;
     },
     [onSubmit, createUser],
   );
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={UserSchema}>
-      {({ isSubmitting }) => (
-        <Form>
-          <Modal.Body>
-            <Row>
-              <ColGroup>
-                <TextField label="Email" name="email" />
-              </ColGroup>
-            </Row>
-            <Row>
-              <ColGroup>
-                <TextField label="First name" name="firstName" />
-              </ColGroup>
-            </Row>
-            <Row>
-              <ColGroup>
-                <TextField label="Last name" name="lastName" />
-              </ColGroup>
-            </Row>
-            <Row>
-              <ColGroup>
-                <TextField label="Password" name="password" type="password" />
-              </ColGroup>
-            </Row>
-            <Row>
-              <ColGroup>
-                <TextField label="Confirm Password" name="passwordConfirmation" type="password" />
-              </ColGroup>
-            </Row>
-          </Modal.Body>
-          <Modal.Footer>
-            <SubmitButton>Add</SubmitButton>
-            <Button disabled={isSubmitting} variant="secondary" onClick={onCancel}>
-              Cancel
-            </Button>
-          </Modal.Footer>
-        </Form>
-      )}
-    </Formik>
+    <>
+      <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={UserSchema}>
+        {({ isSubmitting }) => (
+          <Form>
+            <Modal.Body>
+              <Row>
+                <ColGroup>
+                  <TextField label="Email" name="email" />
+                </ColGroup>
+              </Row>
+              <Row>
+                <ColGroup>
+                  <TextField label="First name" name="firstName" />
+                </ColGroup>
+              </Row>
+              <Row>
+                <ColGroup>
+                  <TextField label="Last name" name="lastName" />
+                </ColGroup>
+              </Row>
+              <Row>
+                <ColGroup>
+                  <TextField label="Password" name="password" type="password" />
+                </ColGroup>
+              </Row>
+              <Row>
+                <ColGroup>
+                  <TextField label="Confirm Password" name="passwordConfirmation" type="password" />
+                </ColGroup>
+              </Row>
+            </Modal.Body>
+            <Modal.Footer>
+              <SubmitButton>Add</SubmitButton>
+              <Button disabled={isSubmitting} variant="secondary" onClick={onCancel}>
+                Cancel
+              </Button>
+            </Modal.Footer>
+          </Form>
+        )}
+      </Formik>
+    </>
   );
 }

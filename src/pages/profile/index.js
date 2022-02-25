@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 
 import { PublicLayout } from '@templates/Layout';
