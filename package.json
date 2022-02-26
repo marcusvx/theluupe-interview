@@ -5,10 +5,7 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "build:nexus-typegen": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only ./server/graphql/schema",
-    "build": "npm run build:nexus-typegen && next build",
     "dev": "nodemon ./server/index.js",
-    "nexus:gen": "ts-node --transpile-only --compiler-options '{\"module\":\"CommonJS\"}' ./server/graphql/schema",
     "postinstall": "prisma generate",
     "prisma:migration": "prisma migrate dev",
     "prisma:run-migration": "prisma migrate deploy",
