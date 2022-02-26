@@ -6,7 +6,28 @@ const r = {
     const { session } = ctx.request;
     return Boolean(session && session.user);
   }),
+  canEditUser: rule()((_, { userEditInput: { id } }, ctx) => isSameUser(id, ctx)),
+  canEditPost: rule()(async (_, { postUpdateInput: { id } }, ctx) => await isSamePostUser(id, ctx)),
+  canDeletePost: rule()(async (_, { id }, ctx) => await isSamePostUser(id, ctx)),
 };
+
+async function isSamePostUser(postId, ctx) {
+  const post = await ctx.prisma.post.findUnique({
+    where: { id: postId },
+    include: {
+      author: true,
+    },
+  });
+
+  return isSameUser(post.author.id, ctx);
+}
+
+function isSameUser(userId, ctx) {
+  const { session } = ctx.request;
+  const sessionUser = session.user;
+
+  return Boolean(sessionUser && userId === sessionUser.id);
+}
 
 const permissions = {
   Query: {
@@ -17,7 +38,9 @@ const permissions = {
   Mutation: {
     createUser: r.isAnybody,
     createPost: r.isAuthenticatedUser,
-    editUser: r.isAuthenticatedUser,
+    editUser: r.canEditUser,
+    editPost: r.canEditPost,
+    deletePost: r.canDeletePost,
   },
   User: r.isAnybody,
   Post: r.isAnybody,

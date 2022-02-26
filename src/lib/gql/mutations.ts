@@ -39,7 +39,7 @@ const EditPost = gql`
 
 const DeletePost = gql`
   mutation DeletePost($id: String!) {
-    deletePost(objectDeleteInput: { id: $id }) {
+    deletePost(id: $id) {
       id
     }
   }
