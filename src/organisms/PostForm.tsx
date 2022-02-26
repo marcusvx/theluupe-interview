@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import React, { useCallback } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 
 import { PostInput } from '@dal/PostInput';
 import { Post as PostSchema } from '@shared/validation/schemas';
 import { CreatePost, EditPost } from '@lib/gql/mutations';
+import { GetPosts } from '@lib/gql/queries';
 
 import { ColGroup, Field, Form, Formik, Row } from '@atoms/Form';
 import { SubmitButton } from '@molecules/forms/SubmitButton';
@@ -19,17 +19,16 @@ interface PostFormProps {
 }
 
 export function PostForm({ post }: PostFormProps): JSX.Element {
-  const [createPost] = useMutation(CreatePost, {
-    refetchQueries: ['GetPosts'],
-  });
-  const [editPost] = useMutation(EditPost);
+  const refetchQueries = [{ query: GetPosts }];
+  const [createPost] = useMutation(CreatePost, { refetchQueries });
+  const [editPost] = useMutation(EditPost, { refetchQueries });
   const initialValues: PostInput = { content: post?.content ?? '', title: post?.title ?? '' };
   const router = useRouter();
 
   const handleSubmit = useCallback(async (postInput: Partial<PostInput>): Promise<void> => {
     const { id } = await createOrEdit(postInput);
 
-    router.push(`/blog/${id}`);
+    router.push(`/blog`);
   }, []);
 
   return (

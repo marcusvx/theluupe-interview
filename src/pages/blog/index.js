@@ -15,6 +15,7 @@ const Posts = () => {
       take: TAKE,
       skip: 0,
     },
+    fetchPolicy: 'cache-and-network',
   });
 
   const loadMore = () => {

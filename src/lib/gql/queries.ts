@@ -21,8 +21,8 @@ const GetPost = gql`
 
 const GetPosts = gql`
   ${PostListItem}
-  query GetPosts($take: Int!, $skip: Int!) {
-    posts(take: $take, skip: $skip) {
+  query GetPosts($take: Int, $skip: Int) {
+    posts(take: $take, skip: $skip, orderBy: { createdAt: desc }) {
       ...PostListItem
     }
   }
@@ -31,7 +31,7 @@ const GetPosts = gql`
 const GetPostsByAuthor = gql`
   ${PostListItem}
   query GetPostsByAuthor($id: StringFilter!) {
-    posts(where: { author: { id: $id } }) {
+    posts(where: { author: { id: $id } }, orderBy: { createdAt: desc }) {
       ...PostListItem
     }
   }
